@@ -24,63 +24,63 @@ public final class Constants {
         /**
          * Static Friction Offset (to overcome the friction of the system)
          */
-        public static final double kS = 2.0;
+        public static final double kS = 0.0;
         /**
          * Velocity Feedforward (to continue the current speed)
          */
-        public static final double kV = 2.0;
+        public static final double kV = 0.0;
         /**
-         * the voltage needed to reach a certain excalaration (i have no idea what number to put)
+         * the voltage needed to reach a certain acceleration (i have no idea what number to put)
          */
-        public static final double kA = 0;
+        public static final double kA = 0.0;
 
         /**
          * Proportional tuning - error
          */
-        public static final double kP = 2.0;
+        public static final double kP = 0.0;
         /**
          * Integral tuning - learning
          */
-        public static final double kI = 2.0;
+        public static final double kI = 0.0;
         /**
          * Derivative tuning - overshoot
          */
-        public static final double kD = 2.0;
+        public static final double kD = 0.0;
       } 
 
       public static class Steer {
         /**
          * Static Friction Offset (to overcome the friction of the system)
          */
-        public static final double kS = 2.0;
+        public static final double kS = 0.0;
         /**
          * Velocity Feedforward (to continue the current speed)
          */
-        public static final double kV = 2.0;
+        public static final double kV = 0.0;
         /**
-         * the voltage needed to reach a certain excalaration (i have no idea what number to put)
+         * the voltage needed to reach a certain acceleration (i have no idea what number to put)
          */
-        public static final double kA = 0;
+        public static final double kA = .0;
 
 
         /**
          * Proportional tuning - error
          */
-        public static final double kP = 2.0;
+        public static final double kP = 0.0;
         /**
          * Integral tuning - learning
          */
-        public static final double kI = 2.0;
+        public static final double kI = 0.0;
         /**
          * Derivative tuning - overshoot
          */
-        public static final double kD = 2.0;
+        public static final double kD = 0.0;
       } 
 
     }
 
     public static class Stats {
-      public static final double kMaxVoltage = 12.0;
+      public static final double kMaxVoltage = 10.0;
       public static final double kStatorCurrentLimit = 35.0;
       public static final double kSupplyCurrentLimit = 35.0;
       
