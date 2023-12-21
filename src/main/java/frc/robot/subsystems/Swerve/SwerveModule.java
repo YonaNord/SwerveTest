@@ -77,36 +77,36 @@ public class SwerveModule extends SubsystemBase {
             .withFeedbackRemoteSensorID(steerEncoderCANID)
             .withRotorToSensorRatio(Swerve.Stats.kRotorToSensorRatio);
 
-        Slot0Configs slot0DriveConfigs = new Slot0Configs()
-            .withKA(Swerve.PID.Drive.kA) // Acceleration 
-            .withKS(Swerve.PID.Drive.kS) // Static Friction Offset
-            .withKV(Swerve.PID.Drive.kV) // Velocity Feedforward
-            // P I D
-            .withKP(Swerve.PID.Drive.kP)  // Proportional tuning - error
-            .withKI(Swerve.PID.Drive.kI) // Integral tuning - learning
-            .withKD(Swerve.PID.Drive.kD); // Derivative tuning - overshoot
+        // Slot0Configs slot0DriveConfigs = new Slot0Configs()
+        //     .withKA(Swerve.PID.Drive.kA) // Acceleration 
+        //     .withKS(Swerve.PID.Drive.kS) // Static Friction Offset
+        //     .withKV(Swerve.PID.Drive.kV) // Velocity Feedforward
+        //     // P I D
+        //     .withKP(Swerve.PID.Drive.kP)  // Proportional tuning - error
+        //     .withKI(Swerve.PID.Drive.kI) // Integral tuning - learning
+        //     .withKD(Swerve.PID.Drive.kD); // Derivative tuning - overshoot
 
 
 
-        Slot0Configs slot0SteerConfigs = new Slot0Configs()
-            .withKA(Swerve.PID.Steer.kA) // Acceleration 
-            .withKS(Swerve.PID.Steer.kS) // Static Friction Offset
-            .withKV(Swerve.PID.Steer.kV) // Velocity Feedforward
-            // P I D
-            .withKP(Swerve.PID.Steer.kP)  // Proportional tuning - error
-            .withKI(Swerve.PID.Steer.kI) // Integral tuning - learning
-            .withKD(Swerve.PID.Steer.kD); // Derivative tuning - overshoot
+        // Slot0Configs slot0SteerConfigs = new Slot0Configs()
+        //     .withKA(Swerve.PID.Steer.kA) // Acceleration 
+        //     .withKS(Swerve.PID.Steer.kS) // Static Friction Offset
+        //     .withKV(Swerve.PID.Steer.kV) // Velocity Feedforward
+        //     // P I D
+        //     .withKP(Swerve.PID.Steer.kP)  // Proportional tuning - error
+        //     .withKI(Swerve.PID.Steer.kI) // Integral tuning - learning
+        //     .withKD(Swerve.PID.Steer.kD); // Derivative tuning - overshoot
         
 
 
         this.m_driveMotor.getConfigurator().apply(voltageConfigs);
         this.m_driveMotor.getConfigurator().apply(statorConfigs);
-        this.m_driveMotor.getConfigurator().apply(slot0DriveConfigs);
+        // this.m_driveMotor.getConfigurator().apply(slot0DriveConfigs);
         
         this.m_steerMotor.getConfigurator().apply(voltageConfigs);
         this.m_steerMotor.getConfigurator().apply(statorConfigs);
         this.m_steerMotor.getConfigurator().apply(feedbackConfigs);
-        this.m_steerMotor.getConfigurator().apply(slot0SteerConfigs);
+        // this.m_steerMotor.getConfigurator().apply(slot0SteerConfigs);
         
 
         

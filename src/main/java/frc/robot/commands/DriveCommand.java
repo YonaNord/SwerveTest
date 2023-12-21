@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 /** An example command that uses an example subsystem. */
 public class DriveCommand extends Command {
-    @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
     private final DriveSubsystem m_driveSubsystem;
     private final Double m_xVelocityMps;
     private final Double m_yVelocityMps;
@@ -24,6 +23,7 @@ public class DriveCommand extends Command {
     this.m_xVelocityMps = xValue.getAsDouble();
     this.m_yVelocityMps = yValue.getAsDouble();
     this.m_rotationVelocityRps = rotationValue.getAsDouble();
+    System.out.println("Supposed to move");
 
     addRequirements(driveSubsystem);
   }
@@ -36,16 +36,22 @@ public class DriveCommand extends Command {
   }
 
   @Override
-  public void initialize() {}
+  public void initialize() {
+
+  }
 
   @Override
   public void execute() 
   {
+    // DEBUG
+    System.out.println("xVelocity: " + m_xVelocityMps  + " / " + correctJoystickDrift(m_xVelocityMps)+ "  yVelocity: " + m_yVelocityMps  + " / " + correctJoystickDrift(m_yVelocityMps)+ "  rVelocity: " + m_rotationVelocityRps  + " / " + correctJoystickDrift(m_rotationVelocityRps));
     m_driveSubsystem.setModules(correctJoystickDrift(m_xVelocityMps), correctJoystickDrift(m_yVelocityMps), correctJoystickDrift(m_rotationVelocityRps));
   }
 
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_driveSubsystem.setModules(0, 0, 0);
+  }
 
   // Returns true when the command should end.
   @Override

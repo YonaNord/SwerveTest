@@ -1,7 +1,7 @@
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
-
+//https://github.com/Team364/BaseFalconSwerve/tree/main
 package frc.robot.subsystems.Drive;
 
 import com.kauailabs.navx.frc.AHRS;
@@ -36,6 +36,7 @@ public class DriveSubsystem extends SubsystemBase {
 
 
   public DriveSubsystem() {
+    System.out.println("we ran drive Subsis");
     this.m_frontLeftModule = new SwerveModule(
       Drive.Motors.kFrontLeftDriveFalconCANID, 
       Drive.Motors.kFrontLeftSteerFalconCANID, 
@@ -62,10 +63,10 @@ public class DriveSubsystem extends SubsystemBase {
     );
 
     m_kinematics = new SwerveDriveKinematics(
-            new Translation2d(Drive.Stats.kTrackWidthMeters / 2.0, Drive.Stats.kWheelbaseMeters / 2.0),
-            new Translation2d(Drive.Stats.kTrackWidthMeters / 2.0, -Drive.Stats.kWheelbaseMeters / 2.0),
             new Translation2d(-Drive.Stats.kTrackWidthMeters / 2.0, Drive.Stats.kWheelbaseMeters / 2.0),
-            new Translation2d(-Drive.Stats.kTrackWidthMeters / 2.0, -Drive.Stats.kWheelbaseMeters / 2.0)
+            new Translation2d(-Drive.Stats.kTrackWidthMeters / 2.0, -Drive.Stats.kWheelbaseMeters / 2.0),
+            new Translation2d(Drive.Stats.kTrackWidthMeters / 2.0, Drive.Stats.kWheelbaseMeters / 2.0),
+            new Translation2d(Drive.Stats.kTrackWidthMeters / 2.0, -Drive.Stats.kWheelbaseMeters / 2.0)
     );
 
     m_navX = new AHRS();

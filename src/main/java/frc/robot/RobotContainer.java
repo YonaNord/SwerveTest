@@ -6,6 +6,7 @@ package frc.robot;
 
 import frc.robot.subsystems.Drive.DriveSubsystem;
 import frc.robot.commands.DriveCommand;
+import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -44,7 +45,10 @@ public class RobotContainer {
    */
   private void configureBindings() 
   {  
-      m_driveSubsystem.setDefaultCommand(new DriveCommand(m_driveSubsystem, oi.xboxController::getLeftX, oi.xboxController::getLeftY, oi.xboxController::getRightX));
+    // TODO CHANGE TO CONSTANTS IF WORKS
+      CommandJoystick joystickX = new CommandJoystick(1);
+      CommandJoystick joystickY = new CommandJoystick(2);
+      m_driveSubsystem.setDefaultCommand(new DriveCommand(m_driveSubsystem, joystickX::getX, joystickX::getY, joystickY::getX));
   }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
