@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import frc.robot.Constants;
+import frc.robot.Constants.Drive;
 import frc.robot.subsystems.Drive.DriveSubsystem;
 
 import java.util.function.DoubleSupplier;
@@ -10,9 +11,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 /** An example command that uses an example subsystem. */
 public class DriveCommand extends Command {
     private final DriveSubsystem m_driveSubsystem;
-    private final Double m_xVelocityMps;
-    private final Double m_yVelocityMps;
-    private final Double m_rotationVelocityRps;
+    private final DoubleSupplier m_xDoubleSupplier;
+    private final DoubleSupplier m_yDoubleSupplier;
+    private final DoubleSupplier m_rotationDoubleSupplier;
   /**
    * Creates a new ExampleCommand.
    *
@@ -20,10 +21,9 @@ public class DriveCommand extends Command {
    */
   public DriveCommand(DriveSubsystem driveSubsystem, DoubleSupplier xValue, DoubleSupplier yValue, DoubleSupplier rotationValue) {
     this.m_driveSubsystem = driveSubsystem;
-    this.m_xVelocityMps = xValue.getAsDouble();
-    this.m_yVelocityMps = yValue.getAsDouble();
-    this.m_rotationVelocityRps = rotationValue.getAsDouble();
-    System.out.println("Supposed to move");
+    this.m_xDoubleSupplier = xValue;
+    this.m_yDoubleSupplier = yValue;
+    this.m_rotationDoubleSupplier = rotationValue;
 
     addRequirements(driveSubsystem);
   }
@@ -36,16 +36,20 @@ public class DriveCommand extends Command {
   }
 
   @Override
-  public void initialize() {
-
-  }
+  public void initialize() {}
 
   @Override
   public void execute() 
   {
-    // DEBUG
-    System.out.println("xVelocity: " + m_xVelocityMps  + " / " + correctJoystickDrift(m_xVelocityMps)+ "  yVelocity: " + m_yVelocityMps  + " / " + correctJoystickDrift(m_yVelocityMps)+ "  rVelocity: " + m_rotationVelocityRps  + " / " + correctJoystickDrift(m_rotationVelocityRps));
-    m_driveSubsystem.setModules(correctJoystickDrift(m_xVelocityMps), correctJoystickDrift(m_yVelocityMps), correctJoystickDrift(m_rotationVelocityRps));
+    m_driveSubsystem.setModules(
+      correctJoystickDrift(m_xDoubleSupplier.getAsDouble()) * Drive.Stats.kMaxVelocityMetersPerSecond,
+      correctJoystickDrift(m_yDoubleSupplier.getAsDouble()) * Drive.Stats.kMaxVelocityMetersPerSecond, 
+      correctJoystickDrift(m_rotationDoubleSupplier.getAsDouble()) * Drive.Stats.kMaxAngularVelocityRadiansPerSecond
+    );
+    // ! DEBUG
+    System.out.println("x: " + correctJoystickDrift(m_xDoubleSupplier.getAsDouble()) * Drive.Stats.kMaxVelocityMetersPerSecond); 
+    System.out.println("y: " + correctJoystickDrift(m_yDoubleSupplier.getAsDouble()) * Drive.Stats.kMaxVelocityMetersPerSecond);
+    System.out.println("rotation: " + correctJoystickDrift(m_rotationDoubleSupplier.getAsDouble()) * Drive.Stats.kMaxAngularVelocityRadiansPerSecond);
   }
 
   @Override

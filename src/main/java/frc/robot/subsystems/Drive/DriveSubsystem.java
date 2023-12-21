@@ -16,6 +16,7 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.Drive;
+import frc.robot.Constants.Swerve;
 import frc.robot.subsystems.Swerve.SwerveModule;
 
 
@@ -63,10 +64,10 @@ public class DriveSubsystem extends SubsystemBase {
     );
 
     m_kinematics = new SwerveDriveKinematics(
-            new Translation2d(-Drive.Stats.kTrackWidthMeters / 2.0, Drive.Stats.kWheelbaseMeters / 2.0),
-            new Translation2d(-Drive.Stats.kTrackWidthMeters / 2.0, -Drive.Stats.kWheelbaseMeters / 2.0),
             new Translation2d(Drive.Stats.kTrackWidthMeters / 2.0, Drive.Stats.kWheelbaseMeters / 2.0),
-            new Translation2d(Drive.Stats.kTrackWidthMeters / 2.0, -Drive.Stats.kWheelbaseMeters / 2.0)
+            new Translation2d(Drive.Stats.kTrackWidthMeters / 2.0, -Drive.Stats.kWheelbaseMeters / 2.0),
+            new Translation2d(-Drive.Stats.kTrackWidthMeters / 2.0, Drive.Stats.kWheelbaseMeters / 2.0),
+            new Translation2d(-Drive.Stats.kTrackWidthMeters / 2.0, -Drive.Stats.kWheelbaseMeters / 2.0)
     );
 
     m_navX = new AHRS();
@@ -116,7 +117,6 @@ public class DriveSubsystem extends SubsystemBase {
       m_odometry.resetPosition(m_navX.getRotation2d(), m_modulePositions, m_currentPose);
   }
 
-
   @Override
   public void periodic()
    {
@@ -125,8 +125,19 @@ public class DriveSubsystem extends SubsystemBase {
       new SwerveModulePosition(m_frontRightModule.getDriveMotor().getPosition().asSupplier().get(), m_frontRightModule.getModuleState().angle),
       new SwerveModulePosition(m_backLeftModule.getDriveMotor().getPosition().asSupplier().get(), m_backLeftModule.getModuleState().angle), 
       new SwerveModulePosition(m_backRightModule.getDriveMotor().getPosition().asSupplier().get(), m_backRightModule.getModuleState().angle)
-    }
-    );
+    });
+    SwerveModuleState[] states = m_kinematics.toSwerveModuleStates(m_swerveSpeeds);
+
+    states[0].speedMetersPerSecond = states[0].speedMetersPerSecond / Drive.Stats.kMaxVelocityMetersPerSecond * Swerve.Stats.kMaxVoltage;
+    states[1].speedMetersPerSecond = states[1].speedMetersPerSecond / Drive.Stats.kMaxVelocityMetersPerSecond * Swerve.Stats.kMaxVoltage;
+    states[2].speedMetersPerSecond = states[2].speedMetersPerSecond / Drive.Stats.kMaxVelocityMetersPerSecond * Swerve.Stats.kMaxVoltage;
+    states[3].speedMetersPerSecond = states[3].speedMetersPerSecond / Drive.Stats.kMaxVelocityMetersPerSecond * Swerve.Stats.kMaxVoltage;
+
+    m_frontLeftModule.setModuleState(states[0]);
+    m_frontRightModule.setModuleState(states[0]);
+    m_backLeftModule.setModuleState(states[0]);
+    m_backRightModule.setModuleState(states[0]);
+
   }
 
   @Override

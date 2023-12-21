@@ -60,7 +60,6 @@ public class SwerveModule extends SubsystemBase {
      * The CANID of the encoder that will replace the included encoder inside the Falcon 500
      */
     private void configMotors(int steerEncoderCANID) {
-      // ! I DONT KNOW THE ACTUAL VOLTAGES AND STUFF, IM GUESSING BASED ON YOTAM'S FRC-2023-CODE ---------------------------------------
 
         VoltageConfigs voltageConfigs = new VoltageConfigs()
             .withPeakForwardVoltage(Swerve.Stats.kMaxVoltage)
@@ -140,7 +139,10 @@ public class SwerveModule extends SubsystemBase {
      * <i>(Check CTRE's NeutralMode documentation for more info)</i>
      *  
      */
-
+    public void setNeutralMode(NeutralModeValue neutralMode) {
+        this.m_driveMotor.setNeutralMode(neutralMode);
+        this.m_steerMotor.setNeutralMode(neutralMode);
+    }
     
 
     public TalonFX getDriveMotor() {
@@ -159,14 +161,6 @@ public class SwerveModule extends SubsystemBase {
         return this.m_moduleState;
     }
 
-    /**
-     * @param neutralMode
-     * The NeutralMode for the SwerveModule's motors
-     */
-    public void setNeutralMode(NeutralModeValue neutralMode) {
-        this.m_driveMotor.setNeutralMode(neutralMode);
-        this.m_steerMotor.setNeutralMode(neutralMode);
-    }
 
     /**
      *
