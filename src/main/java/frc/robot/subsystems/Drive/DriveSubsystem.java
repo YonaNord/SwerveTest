@@ -134,9 +134,9 @@ public class DriveSubsystem extends SubsystemBase {
     states[3].speedMetersPerSecond = states[3].speedMetersPerSecond / Drive.Stats.kMaxVelocityMetersPerSecond * Swerve.Stats.kMaxVoltage;
 
     m_frontLeftModule.setModuleState(states[0]);
-    m_frontRightModule.setModuleState(states[0]);
-    m_backLeftModule.setModuleState(states[0]);
-    m_backRightModule.setModuleState(states[0]);
+    m_frontRightModule.setModuleState(states[1]);
+    m_backLeftModule.setModuleState(states[2]);
+    m_backRightModule.setModuleState(states[3]);
 
   }
 
