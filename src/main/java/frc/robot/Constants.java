@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.util.Units;
 
 /**
@@ -80,7 +82,7 @@ public final class Constants {
     }
 
     public static class Stats {
-      public static final double kMaxVoltage = 10.0;
+      public static final double kMaxVoltage = 12.0;
       public static final double kStatorCurrentLimit = 35.0;
       public static final double kSupplyCurrentLimit = 35.0;
       
@@ -103,6 +105,7 @@ public final class Constants {
       public static final double kRotorToSensorRatio = 8.14;
 
       public static final double kDriveWheelRadiusInches = 2;
+      public static final double wheelRadiusMeters = Units.inchesToMeters(kDriveWheelRadiusInches);
       
       
     }
@@ -141,6 +144,13 @@ public final class Constants {
         public static final double kMaxVelocityMetersPerSecond = 2.39268;
         public static final double kMaxAngularVelocityRadiansPerSecond = kMaxVelocityMetersPerSecond /
         Math.hypot(kTrackWidthMeters / 2.0, kWheelbaseMeters / 2.0);
+
+        public static final SwerveDriveKinematics kinematics = new SwerveDriveKinematics( // TODO needs to be configured with diffrent constants that has the modules position relative to the middle of the robot
+          new Translation2d(kTrackWidthMeters / 2.0, kWheelbaseMeters / 2.0), // ++
+          new Translation2d(kTrackWidthMeters / 2.0, -kWheelbaseMeters / 2.0), // +-
+          new Translation2d(-kTrackWidthMeters / 2.0, kWheelbaseMeters / 2.0), // -+
+          new Translation2d(-kTrackWidthMeters / 2.0, -kWheelbaseMeters / 2.0) // --
+        );
 
     }
 

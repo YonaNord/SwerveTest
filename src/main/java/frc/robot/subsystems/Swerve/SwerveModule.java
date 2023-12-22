@@ -13,7 +13,6 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.Swerve;
 
@@ -127,9 +126,8 @@ public class SwerveModule extends SubsystemBase {
      * @param value 
      * Rounds per minute
      */
-    public double mpsToRpm(double value) {
-        double wheelRadiusMeters = Units.inchesToMeters(Swerve.Stats.kDriveWheelRadiusInches);
-        return (60/(2*Math.PI*wheelRadiusMeters))*value;
+    public double mpsToRpm(double rpmValue) { 
+        return (60/(2*Math.PI*Swerve.Stats.wheelRadiusMeters))*rpmValue;
     }   
 
     /**
@@ -144,6 +142,17 @@ public class SwerveModule extends SubsystemBase {
         this.m_steerMotor.setNeutralMode(neutralMode);
     }
     
+    public Rotation2d getSteerAngle() {
+        return this.m_moduleState.angle;
+    } 
+
+    public void setCoast(){
+        setNeutralMode(NeutralModeValue.Coast);
+    }
+    
+    public void setBreak() {
+        setNeutralMode(NeutralModeValue.Brake);
+    }
 
     public TalonFX getDriveMotor() {
         return this.m_driveMotor;
@@ -166,7 +175,7 @@ public class SwerveModule extends SubsystemBase {
      *
      * @param speed The speed to set (Percentage). Value should be between -1.0 and 1.0.
      */
-    public void setDriveMotor(int speed) {
+    public void setDriveMotor(double speed) {
         
         this.m_driveMotor.set(speed);
     }
@@ -176,12 +185,12 @@ public class SwerveModule extends SubsystemBase {
      *
      * @param speed The speed to set (Percentage). Value should be between -1.0 and 1.0.
      */
-    public void setSteerMotor(int speed) {
+    public void setSteerMotor(double speed) {
         this.m_steerMotor.set(speed);
     }
 
     @Override
-    public void periodic() {
+    public void periodic() { // todo logs needed - ShuffleBoard
     }
 
     @Override

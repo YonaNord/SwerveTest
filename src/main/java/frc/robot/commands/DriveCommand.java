@@ -47,9 +47,10 @@ public class DriveCommand extends Command {
       correctJoystickDrift(m_rotationDoubleSupplier.getAsDouble()) * Drive.Stats.kMaxAngularVelocityRadiansPerSecond
     );
     // ! DEBUG
-    System.out.println("x: " + correctJoystickDrift(m_xDoubleSupplier.getAsDouble()) * Drive.Stats.kMaxVelocityMetersPerSecond); 
-    System.out.println("y: " + correctJoystickDrift(m_yDoubleSupplier.getAsDouble()) * Drive.Stats.kMaxVelocityMetersPerSecond);
-    System.out.println("rotation: " + correctJoystickDrift(m_rotationDoubleSupplier.getAsDouble()) * Drive.Stats.kMaxAngularVelocityRadiansPerSecond);
+    // TODO CONVERT TO SHUFFLEBOARD
+    // System.out.println("x: " + correctJoystickDrift(m_xDoubleSupplier.getAsDouble()) * Drive.Stats.kMaxVelocityMetersPerSecond); 
+    // System.out.println("y: " + correctJoystickDrift(m_yDoubleSupplier.getAsDouble()) * Drive.Stats.kMaxVelocityMetersPerSecond);
+    // System.out.println("rotation: " + correctJoystickDrift(m_rotationDoubleSupplier.getAsDouble()) * Drive.Stats.kMaxAngularVelocityRadiansPerSecond);
   }
 
   @Override
