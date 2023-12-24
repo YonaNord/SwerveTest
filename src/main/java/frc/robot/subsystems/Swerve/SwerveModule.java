@@ -1,5 +1,6 @@
 package frc.robot.subsystems.Swerve;
 
+import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.FeedbackConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
@@ -101,6 +102,7 @@ public class SwerveModule extends SubsystemBase {
         this.m_driveMotor.getConfigurator().apply(statorConfigs);
         // this.m_driveMotor.getConfigurator().apply(slot0DriveConfigs);
         
+        
         this.m_steerMotor.getConfigurator().apply(voltageConfigs);
         this.m_steerMotor.getConfigurator().apply(statorConfigs);
         this.m_steerMotor.getConfigurator().apply(feedbackConfigs);
@@ -164,6 +166,10 @@ public class SwerveModule extends SubsystemBase {
 
     public CANcoder getSteerEncoder() {
         return this.m_steerEncoder;
+    }
+
+    public StatusSignal<Double> getVelocity() {
+        return this.m_driveMotor.getVelocity();
     }
 
     public SwerveModuleState getModuleState() {
