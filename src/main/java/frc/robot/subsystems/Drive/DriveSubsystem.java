@@ -101,6 +101,8 @@ public class DriveSubsystem extends SubsystemBase {
    * Rotation velocity (Radians Per Second)
    */
   public void setModules(double xVelocityMps, double yVelocityMps, double rotationVelocityRps) {
+    xVelocityMps=0;
+    yVelocityMps=0.1;
       this.m_swerveSpeeds = new ChassisSpeeds(xVelocityMps, yVelocityMps, rotationVelocityRps);
       SwerveModuleState[] target_states = Drive.Stats.kinematics.toSwerveModuleStates(this.m_swerveSpeeds);
       setModulesStates(target_states);

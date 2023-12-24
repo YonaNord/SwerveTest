@@ -63,7 +63,7 @@ public class SwerveModule extends SubsystemBase {
 
         VoltageConfigs voltageConfigs = new VoltageConfigs()
             .withPeakForwardVoltage(Swerve.Stats.kMaxVoltage)
-            .withPeakReverseVoltage(Swerve.Stats.kMaxVoltage);
+            .withPeakReverseVoltage(-Swerve.Stats.kMaxVoltage);
 
         CurrentLimitsConfigs statorConfigs = new CurrentLimitsConfigs()
             .withStatorCurrentLimitEnable(true)

@@ -155,17 +155,17 @@ public final class Constants {
     }
 
     public static class Motors {
-      public static final int kFrontLeftDriveFalconCANID = 9;
-      public static final int kFrontLeftSteerFalconCANID = 3;
+      public static final int kFrontLeftDriveFalconCANID = 3;
+      public static final int kFrontLeftSteerFalconCANID = 9;
 
-      public static final int kFrontRightDriveFalconCANID = 6;
-      public static final int kFrontRightSteerFalconCANID = 5;
+      public static final int kFrontRightDriveFalconCANID = 5;
+      public static final int kFrontRightSteerFalconCANID = 6;
 
-      public static final int kBackLeftDriveFalconCANID = 10;
-      public static final int kBackLeftSteerFalconCANID = 4;
+      public static final int kBackLeftDriveFalconCANID = 4;
+      public static final int kBackLeftSteerFalconCANID = 10;
 
-      public static final int kBackRightDriveFalconCANID = 7;
-      public static final int kBackRightSteerFalconCANID = 8;
+      public static final int kBackRightDriveFalconCANID = 8;
+      public static final int kBackRightSteerFalconCANID = 7;
 
 
     }
