@@ -5,6 +5,8 @@
 package frc.robot;
 
 import frc.robot.subsystems.Drive.DriveSubsystem;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.DriveCommand;
 
 /**
@@ -29,6 +31,7 @@ public class RobotContainer {
     this.m_driveSubsystem = new DriveSubsystem();
     this.oi = new OI();
     configureBindings();
+    m_driveSubsystem.setAllModulesToZero();
   }
 
   /**

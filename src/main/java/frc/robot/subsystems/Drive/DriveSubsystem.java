@@ -111,6 +111,17 @@ public class DriveSubsystem extends SubsystemBase {
       m_odometry.resetPosition(m_navX.getRotation2d(), m_modulePositions, m_currentPose);
   }
 
+  public void setAllModulesToZero() {
+    SwerveModuleState[] zeroStates = new SwerveModuleState[4];
+
+    zeroStates[0] = new SwerveModuleState(0, Rotation2d.fromDegrees(-Drive.Stats.kFrontLeftModuleOffsetInDegrees));
+    zeroStates[1] = new SwerveModuleState(0, Rotation2d.fromDegrees(-Drive.Stats.kFrontRightModuleOffsetInDegrees));
+    zeroStates[2] = new SwerveModuleState(0, Rotation2d.fromDegrees(-Drive.Stats.kBackLeftModuleOffsetInDegrees));
+    zeroStates[3] = new SwerveModuleState(0, Rotation2d.fromDegrees(-Drive.Stats.kBackRightModuleOffsetInDegrees));
+
+    setModulesStates(zeroStates);
+}
+
   /**
    * gets the angle of the navx 
    */

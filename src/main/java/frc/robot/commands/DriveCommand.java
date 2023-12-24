@@ -53,6 +53,10 @@ public class DriveCommand extends Command {
     // System.out.println("rotation: " + correctJoystickDrift(m_rotationDoubleSupplier.getAsDouble()) * Drive.Stats.kMaxAngularVelocityRadiansPerSecond);
   }
 
+  // public void setToZero() {
+  //   m_driveSubsystem.setAllModulesToZero();
+  // } 
+
   @Override
   public void end(boolean interrupted) {
     m_driveSubsystem.setModules(0, 0, 0);
