@@ -11,6 +11,7 @@ import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import com.ctre.phoenix6.controls.VelocityVoltage;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
@@ -25,6 +26,7 @@ public class SwerveModule extends SubsystemBase {
     private final TalonFX m_driveMotor;
     private final TalonFX m_steerMotor;
     private final CANcoder m_steerEncoder;
+    private final VelocityVoltage m_voltageVelocity;
     private final VelocityDutyCycle m_velocityDutyCycle;
     private final MotionMagicDutyCycle m_motionMagicDutyCycle;
 
@@ -119,8 +121,10 @@ public class SwerveModule extends SubsystemBase {
      */
     public void setModuleState(SwerveModuleState state){
         this.m_moduleState = SwerveModuleState.optimize(state, this.m_moduleState.angle);
-        this.m_driveMotor.setControl(this.m_velocityDutyCycle.withVelocity(mpsToRpm(state.speedMetersPerSecond)));
-        this.m_steerMotor.setControl(this.m_motionMagicDutyCycle.withPosition(state.angle.getDegrees()));
+        this.m_driveMotor.setControl(m_voltageVelocity.withVelocity(mpsToRps(state.speedMetersPerSecond)));
+
+        // this.m_driveMotor.setControl(this.m_velocityDutyCycle.withVelocity(mpsToRpm(state.speedMetersPerSecond)));
+        // this.m_steerMotor.setControl(this.m_motionMagicDutyCycle.withPosition(state.angle.getDegrees()));
     }
 
     /**
@@ -139,6 +143,15 @@ public class SwerveModule extends SubsystemBase {
      */
     public double mpsToRpm(double mpsValue) {
         return (mpsValue / (2 * Math.PI * Swerve.Stats.wheelRadiusMeters)) * 60;
+    }
+
+    /**
+     * Convertion from Meters per second to rounds per second
+     * @param value 
+     * Meters per second
+     */
+    public double mpsToRps(double mpsValue) {
+        return (mpsValue / (2 * Math.PI * Swerve.Stats.wheelRadiusMeters));
     }
 
     /**
