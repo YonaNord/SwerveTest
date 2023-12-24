@@ -42,7 +42,7 @@ public class RobotContainer {
    */
   private void configureBindings() 
   {  
-      m_driveSubsystem.setDefaultCommand(new DriveCommand(m_driveSubsystem, oi.xboxController::getLeftX, oi.xboxController::getLeftY, oi.xboxController::getRightY));
+      m_driveSubsystem.setDefaultCommand(new DriveCommand(m_driveSubsystem, oi.joystickLeft::getX, oi.joystickLeft::getY, oi.joystickRight::getX));
   }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
