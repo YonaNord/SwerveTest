@@ -64,10 +64,10 @@ public class DriveSubsystem extends SubsystemBase {
 
     m_modulePositions = new SwerveModulePosition[]{ 
       // https://github.com/SwerveDriveSpecialties/Do-not-use-swerve-lib-2022-unmaintained/blob/develop/examples/mk3-testchassis/src/main/java/com/swervedrivespecialties/examples/mk3testchassis/subsystems/DrivetrainSubsystem.java
-      new SwerveModulePosition(m_frontLeftModule.getVelocity().getValueAsDouble(), m_frontLeftModule.getSteerAngle()), 
-      new SwerveModulePosition(m_frontRightModule.getVelocity().getValueAsDouble(), m_frontRightModule.getSteerAngle()),
-      new SwerveModulePosition(m_backLeftModule.getVelocity().getValueAsDouble(), m_backLeftModule.getSteerAngle()), 
-      new SwerveModulePosition(m_backRightModule.getVelocity().getValueAsDouble(), m_backRightModule.getSteerAngle())
+      new SwerveModulePosition(m_frontLeftModule.getVelocityMetersPerSecond(), m_frontLeftModule.getSteerAngle()), 
+      new SwerveModulePosition(m_frontRightModule.getVelocityMetersPerSecond(), m_frontRightModule.getSteerAngle()),
+      new SwerveModulePosition(m_backLeftModule.getVelocityMetersPerSecond(), m_backLeftModule.getSteerAngle()), 
+      new SwerveModulePosition(m_backRightModule.getVelocityMetersPerSecond(), m_backRightModule.getSteerAngle())
     };
        
     //TODO use swerve position estimator https://docs.wpilib.org/en/latest/docs/software/advanced-controls/state-space/state-space-pose-estimators.html
@@ -118,15 +118,17 @@ public class DriveSubsystem extends SubsystemBase {
     return Rotation2d.fromDegrees((double)m_navX.getFusedHeading());
   }
 
+
+
   @Override
   public void periodic()
    {
     // module function that returns the position
     m_odometry.update(getGyroAngleInRotation2d(), new SwerveModulePosition[]{ 
-      new SwerveModulePosition(m_frontLeftModule.getVelocity().getValueAsDouble(), m_frontLeftModule.getSteerAngle()), 
-      new SwerveModulePosition(m_frontRightModule.getVelocity().getValueAsDouble(), m_frontRightModule.getSteerAngle()),
-      new SwerveModulePosition(m_backLeftModule.getVelocity().getValueAsDouble(), m_backLeftModule.getSteerAngle()), 
-      new SwerveModulePosition(m_backRightModule.getVelocity().getValueAsDouble(), m_backRightModule.getSteerAngle())
+      new SwerveModulePosition(m_frontLeftModule.getVelocityMetersPerSecond(), m_frontLeftModule.getSteerAngle()), 
+      new SwerveModulePosition(m_frontRightModule.getVelocityMetersPerSecond(), m_frontRightModule.getSteerAngle()),
+      new SwerveModulePosition(m_backLeftModule.getVelocityMetersPerSecond(), m_backLeftModule.getSteerAngle()), 
+      new SwerveModulePosition(m_backRightModule.getVelocityMetersPerSecond(), m_backRightModule.getSteerAngle())
     });
     SwerveModuleState[] states = Drive.Stats.kinematics.toSwerveModuleStates(m_swerveSpeeds);
 

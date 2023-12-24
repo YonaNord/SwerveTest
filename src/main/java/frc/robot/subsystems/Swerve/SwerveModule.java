@@ -124,13 +124,22 @@ public class SwerveModule extends SubsystemBase {
     }
 
     /**
-     * Convertion from Meters per second to Rounds per minute 
+     * Convertion from Rounds per minute to meters per second
      * @param value 
      * Rounds per minute
      */
-    public double mpsToRpm(double rpmValue) { 
+    public double rpmToMps(double rpmValue) { 
         return (60/(2*Math.PI*Swerve.Stats.wheelRadiusMeters))*rpmValue;
     }   
+
+    /**
+     * Convertion from Meters per second to rounds per minute
+     * @param value 
+     * Meters per second
+     */
+    public double mpsToRpm(double mpsValue) {
+        return (mpsValue / (2 * Math.PI * Swerve.Stats.wheelRadiusMeters)) * 60;
+    }
 
     /**
      * @param neutralMode
@@ -168,8 +177,8 @@ public class SwerveModule extends SubsystemBase {
         return this.m_steerEncoder;
     }
 
-    public StatusSignal<Double> getVelocity() {
-        return this.m_driveMotor.getVelocity();
+    public double getVelocityMetersPerSecond() {
+        return this.m_moduleState.speedMetersPerSecond;
     }
 
     public SwerveModuleState getModuleState() {
